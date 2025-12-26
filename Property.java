@@ -1,14 +1,12 @@
-public class Property {
+public abstract class Property {
     private String name;
     private String description;
     private double price;
-    private String type;
 
-    public Property(String name, String description, double price, String type) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.type = type;
+    public Property(String name, String description, double price) {
+        setName(name);
+        setDescription(description);
+        setPrice(price);
     }
 
     public String getName() {
@@ -16,7 +14,10 @@ public class Property {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("name is empty");
+        }
+            this.name = name.trim();
     }
 
     public String getDescription() {
@@ -32,21 +33,18 @@ public class Property {
     }
 
     public void setPrice(double price) {
+        if (price <= 0){
+            throw new IllegalArgumentException("price should be more than 0");
+        }
         this.price = price;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    public abstract String getType();
 
     public void printInfo() {
         System.out.println("Property Name: " + name);
         System.out.println("Description: " + description);
         System.out.println("Price: $" + price);
-        System.out.println("Type: " + type);
+        System.out.println("Type: " + getType());
     }
 }

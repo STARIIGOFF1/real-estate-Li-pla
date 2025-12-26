@@ -1,16 +1,34 @@
+import java.util.Scanner;
+
 public class Main {
   public static void main(String[] args) {
-    Property property1 = new Property("Luxury Apartment", "3 Bedroom apartment in city center", 500000, "Apartment");
-    Property property2 = new Property("Beachfront Villa", "Luxury villa with ocean view", 1500000, "Villa");
+    Scanner sc = new Scanner(System.in);
+    Property p1 = new apartment("Luxury Apartment", "Center", 500000, 7);
+    Property p2 = new villa("Beachfront Villa", "Ocean view", 1500000, true);
+    Property p3 = new villa("Miami Villa", "Beateful city view", 750000, false);
 
-    Property[] realtorProperties = {property1, property2};
+    Property[] realtors_properety = {p1,p2,p3};
+    int n = 0;
+    while(true){
+      realtors_properety[n].printInfo();
+      //System.out.println(n);
+      System.out.println("back, leaving or next?");
+      String ans = sc.nextLine().trim();
 
-    Realtor realtor1 = new Realtor("John Doe", "Elite Realty", realtorProperties);
+      if(ans.equalsIgnoreCase("next")){
+        n++;
+      } else if (ans.equalsIgnoreCase("back")) {
+        n--;
+      } else if  (ans.equalsIgnoreCase("leave")) {
+        sc.close();
+        break;
+      }
 
-
-    Realtor[] agencyRealtors = {realtor1};
-    RealEstateAgency agency = new RealEstateAgency("Elite Realty Group", agencyRealtors);
-
-    agency.printInfo();
+      if ( n==3 ) {
+        n=0;
+      } else if ( n==-1 ) {
+        n=2;
+      }
+    }
   }
 }
