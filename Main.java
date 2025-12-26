@@ -11,7 +11,6 @@ public class Main {
     int n = 0;
     while(true){
       realtors_properety[n].printInfo();
-      //System.out.println(n);
       System.out.println("back, leaving or next?");
       String ans = sc.nextLine().trim();
 
