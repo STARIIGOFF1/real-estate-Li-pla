@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class dbms {
 
-    public static void addCourse(String courseName, String courseCode, int credits) {
+    public static void addProperty(int id, String name, String type, int floor, int price, boolean pool, int roomQty) {
         String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
         Connection con = null;
         PreparedStatement stmt = null;
@@ -12,16 +12,20 @@ public class dbms {
 
             con = DriverManager.getConnection(connectionURL, "postgres", "0000");
 
-            String sqlCourse = "INSERT INTO course (course_name, course_code, credits) VALUES (?, ?, ?)";
+            String sqlCourse = "INSERT INTO property (id, name, type, floor, price, pool, roomQty) VALUES (?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sqlCourse);
 
-            stmt.setString(1, courseName);
-            stmt.setString(2, courseCode);
-            stmt.setInt(3, credits);
+            stmt.setInt(1, id);
+            stmt.setString(2, name);
+            stmt.setString(3, type);
+            stmt.setInt(4, floor);
+            stmt.setInt(5, price);
+            stmt.setBoolean(6, pool);
+            stmt.setInt(7, roomQty);
 
             stmt.executeUpdate();
 
-            System.out.println("Course added: " + courseName);
+            System.out.println("property added: " + name);
 
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver not found.");
