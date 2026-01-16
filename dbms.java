@@ -12,8 +12,8 @@ public class dbms {
 
             con = DriverManager.getConnection(connectionURL, "postgres", "0000");
 
-            String sqlCourse = "INSERT INTO property (id, name, type, floor, price, pool, roomQty) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            stmt = con.prepareStatement(sqlCourse);
+            String sqlProperty = "INSERT INTO property (id, name, type, floor, price, pool, roomQty) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sqlProperty);
 
             stmt.setInt(1, id);
             stmt.setString(2, name);
