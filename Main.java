@@ -8,6 +8,7 @@ public class Main {
     Property p3 = new villa("Miami Villa", "Beateful city view", 750000, false);
 
     dbms.addProperty(1, "miami villa", "villa", 3, 1500000, true, 32);
+    dbms.addRealtor(1,"Aiden Brooks", "Pinnacle Property Group", "Maiami villa, Manhattan penthouse");
 
     Property[] realtors_properety = {p1,p2,p3};
     int n = 0;
