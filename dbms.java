@@ -42,26 +42,106 @@ public class dbms {
         }
     }
 
-    public static void addRealtor(int id, String name, String agency, String property) {
+    public static void readProperty(int id) {
+        String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection(connectionURL, "postgres", "0000");
+
+            String sql = "SELECT id, name, type, floor, price, pool, roomQty FROM property WHERE id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("--- property ---");
+                System.out.println("id: " + rs.getInt("id"));
+                System.out.println("name: " + rs.getString("name"));
+                System.out.println("type: " + rs.getString("type"));
+                System.out.println("floor: " + rs.getInt("floor"));
+                System.out.println("price: " + rs.getInt("price"));
+                System.out.println("pool: " + rs.getBoolean("pool"));
+                System.out.println("roomQty: " + rs.getInt("roomQty"));
+            } else {
+                System.out.println("property not found, id=" + id);
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("PostgreSQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void updatePropertyPrice(int id, int newPrice) {
         String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
         Connection con = null;
         PreparedStatement stmt = null;
 
         try {
             Class.forName("org.postgresql.Driver");
-
             con = DriverManager.getConnection(connectionURL, "postgres", "0000");
 
-            String sqlProperty = "INSERT INTO realtor (id, name, agency, property) VALUES (?, ?, ?, ?) ";
-            stmt = con.prepareStatement(sqlProperty);
+            String sql = "UPDATE property SET price = ? WHERE id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, newPrice);
+            stmt.setInt(2, id);
 
+            int updated = stmt.executeUpdate();
+            if (updated == 1) {
+                System.out.println("property updated (price), id=" + id + ", newPrice=" + newPrice);
+            } else {
+                System.out.println("property not found, nothing updated, id=" + id);
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("PostgreSQL JDBC Driver not found.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void deleteProperty(int id) {
+        String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection(connectionURL, "postgres", "0000");
+
+            String sql = "DELETE FROM property WHERE id = ?";
+            stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
-            stmt.setString(2, name);
-            stmt.setString(3, agency);
-            stmt.setString(4, property);
-            stmt.executeUpdate();
 
-            System.out.println("realtor " + name + " added");
+            int deleted = stmt.executeUpdate();
+            if (deleted == 1) {
+                System.out.println("property deleted, id=" + id);
+            } else {
+                System.out.println("property not found, nothing deleted, id=" + id);
+            }
 
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver not found.");
