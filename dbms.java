@@ -157,4 +157,25 @@ public class dbms {
             }
         }
     }
+
+    public static int getMaxId() {
+        String connectionURL = "jdbc:postgresql://localhost:5432/postgres";
+        String user = "postgres";
+        String password = "0000";
+
+        String sql = "SELECT COALESCE(MAX(id), 0) AS max_id FROM property";
+
+        try (Connection con = DriverManager.getConnection(connectionURL, user, password);
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("max_id");
+            }
+            return 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to get max property id", e);
+        }
+    }
 }
