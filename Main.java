@@ -11,11 +11,11 @@ public class Main {
     dbms.deleteProperty(1);
     dbms.deleteProperty(2);
     dbms.deleteProperty(3);
-
     System.out.println();
+
     Property[] realtors_property = {p1,p2,p3};
-    for(int n=1; n < realtors_property.length; n++){
-      Property current = realtors_property[n];
+    for(int n=1; n < realtors_property.length+1; n++){
+      Property current = realtors_property[n-1];
       String name = current.getName();
       String type = current.getDescription();
       int floor = current.getFloor();
@@ -24,9 +24,13 @@ public class Main {
       int roomQty = current.getRoomQty();
       dbms.addProperty(n,name,type,floor,price,pool,roomQty);
     }
+    System.out.println();
 
     dbms.readProperty(1);
+    System.out.println();
     dbms.readProperty(2);
+    System.out.println();
     dbms.readProperty(3);
+    System.out.println();
   }
 }
