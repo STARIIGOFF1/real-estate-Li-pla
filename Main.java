@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
-
   public static void main() {
-    Scanner sc = new Scanner(System.in);
+    Scanner scaner = new Scanner(System.in);
     Property p1 = new apartment("Luxury Apartment", "Center", 500000, 7, 7);
     Property p2 = new villa("Beachfront Villa", "Ocean view", 1500000, true,4 , 15);
     Property p3 = new villa("Miami Villa", "Beateful city view", 750000, false,3 , 12);

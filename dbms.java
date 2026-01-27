@@ -59,14 +59,15 @@ public class dbms {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("--- property ---");
-                System.out.println("id: " + rs.getInt("id"));
-                System.out.println("name: " + rs.getString("name"));
-                System.out.println("type: " + rs.getString("type"));
-                System.out.println("floor: " + rs.getInt("floor"));
-                System.out.println("price: " + rs.getInt("price"));
-                System.out.println("pool: " + rs.getBoolean("pool"));
-                System.out.println("roomQty: " + rs.getInt("roomQty"));
+                String ID = "id: " + rs.getInt("id") + " | ";
+                String name = "name: " + rs.getString("name") + " | ";
+                String type = "type: " + rs.getString("type") + " | ";
+                String floor = "floor: " + rs.getInt("floor") + " | ";
+                String price = "price: " + rs.getInt("price") + " | ";
+                String pool = "pool: " + rs.getBoolean("pool") + " | ";
+                String roomeQty =  "roomQty: " + rs.getInt("roomQty") + " | ";
+                System.out.println("-------------------------------------------------------PROPERTY-------------------------------------------------------");
+                System.out.println(ID + name + type + floor + price + pool + roomeQty);
             } else {
                 System.out.println("property not found, id=" + id);
             }
