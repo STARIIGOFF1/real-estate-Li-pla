@@ -66,7 +66,7 @@ public class dbms {
                 String price = "price: " + rs.getInt("price") + " | ";
                 String pool = "pool: " + rs.getBoolean("pool") + " | ";
                 String roomeQty =  "roomQty: " + rs.getInt("roomQty") + " | ";
-                System.out.println("-------------------------------------------------------PROPERTY-------------------------------------------------------");
+                System.out.println("------------------------------------------------------PROPERTY------------------------------------------------------");
                 System.out.println(ID + name + type + floor + price + pool + roomeQty);
             } else {
                 System.out.println("property not found, id=" + id);
