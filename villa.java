@@ -1,27 +1,29 @@
 public class villa extends Property{
-    private boolean hasPool;
+    private boolean pool;
 
-    public villa (String name, String discription, double price, boolean hasPool){
-        super(name, discription, price);
-        this.hasPool=hasPool;
+    public villa (String name, String discription, int price, boolean pool, int floor, int roomQty){
+        super(name, discription, price, floor, roomQty);
+        setPool(pool);
     }
 
-    public boolean isHasPool(){
-        return hasPool;
+    @Override
+    public boolean getPool(){
+        return pool;
     }
 
-    public void setHasPool(boolean hasPool){
-        this.hasPool=hasPool;
+    public void setPool(boolean pool){
+        this.pool= pool;
     }
 
     @Override
     public String getType(){
         return "Villa";
     }
+
     @Override
     public void printInfo(){
          super.printInfo();
-         if (hasPool){
+         if (pool){
              System.out.println("Pool: Does have pool");
          }else{
              System.out.println("Pool: Does not have pool");

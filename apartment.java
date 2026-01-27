@@ -1,13 +1,13 @@
 public class apartment extends Property{
-    private int floor;
+    private boolean pool;
 
-    public apartment(String name, String description, double price, int floor) {
-        super(name, description, price);
-        setFloor(floor);
+    public apartment(String name, String description, int price, int floor, int roomQty) {
+        super(name, description, price, floor, roomQty);
+        setPool(pool);
     }
 
-    public void setFloor(int floor){
-        this.floor = floor;
+    public void setPool(boolean pool){
+        this.pool = pool;
     }
 
     public int getFloor(){
@@ -24,4 +24,9 @@ public class apartment extends Property{
         super.printInfo();
         System.out.println("Floor: " + floor);
     }
+
+    @Override
+    public boolean getPool(){
+        return pool;
+    };
 }
